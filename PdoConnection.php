@@ -6,7 +6,6 @@ namespace Qb3ti\Database;
 
 use Qb3ti\Database\Contract\ConnectionInterface;
 use Qb3ti\Database\Exception\ConnectionException;
-use Qb3ti\Database\Attribute;
 use \PDO;
 use \PDOException;
 
@@ -35,7 +34,10 @@ class PdoConnection implements ConnectionInterface
         private string $database,
         private string $username,
         private string $password,
-        private ?array $attributes
+        private ?array $attributes = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]
     )
     {
 
@@ -92,5 +94,16 @@ class PdoConnection implements ConnectionInterface
             , $this->port
             , $this->database
         );
+    }
+
+    /**
+     * Set connection attribute
+     * @param mixed $attribute 
+     * @param mixed $value
+     * @return bool
+     */
+    public function setAttribute(mixed $attribute, mixed $value): bool
+    {
+        return $this->connection->setAttribute($attribute, $value);
     }
 }
