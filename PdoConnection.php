@@ -5,6 +5,7 @@
 namespace Qb3ti\Database;
 
 use Qb3ti\Database\Contract\ConnectionInterface;
+use Qb3ti\Database\Contract\QueryableInterface;
 use Qb3ti\Database\Exception\ConnectionException;
 use \PDO;
 use \PDOException;
